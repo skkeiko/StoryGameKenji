@@ -16,36 +16,36 @@ let currentScene = "backyard";
 const scenes = {
   // See "backyard" for the first example
   backyard: {
-    title: "Location: Backyard",
-    character: "Interviewee:Grandma",
-    text: "Text: well what I remember happening is that Darcie went inside to play with her pretend kitchen, I heard her neighbor mention he was really hungry, and the dog ran around really quickly",
+    title: "Room One - Cooking Area",
+    character: "Interviewee:Chef Frank",
+    text: "You search the Cooking area. There are dozens of orders all asking for the new sauce piling up the station.",
     // you can choose how many choices to include
     // each choice can have text, an action, and/or nextScene
     choices: [
       {
-        text: "Chase after the dog (-10 HP)",
+        text: "Search the area (+10 Stress)",
         action: function () {
-          updateHealth(-10);
+          updateHealth(+10);
         },
-        nextScene: "entrance"
+        nextScene: "WalkinFreezer"
       },
       {
-        text: "Ask about the neighbor",
+        text: "Talk to Chef Frank",
         nextScene: "hallway"
       },
       {
-          text: "Pick up the brass key",
+          text: "Pick up the recipe note",
           action: function () {
-            pickUpItem("brass key");
+            pickUpItem("Recipe Note");
           },
           nextScene: "hallway"
       }
     ]
   },
 
-  entrance: {
-    title: "Location: Entrance",
-    character: "Interviewee:Neighbor",
+  WalkinFreezer: {
+    title: "Location: Walk-In Freezer",
+    character: "Interviewee:Sous-Chef Darren",
     text: "well what I remember...",
     choices: [
       {
@@ -87,7 +87,7 @@ const scenes = {
 
    solution: {
     title: "The solution",
-    text: "You solved the mystery!",
+    text: "You didn't get fired!",
     
   }
 };
@@ -165,10 +165,10 @@ updateScene(currentScene);
 // --------------------------------------------------
 
 // Create a variable for health
-let health = 100;
+let health = 0;
 
 // Display current health
-const healthDisplay = document.getElementById("health-display");
+const healthDisplay = document.getElementById("Stress-display");
 
 // Create a function to update health 
 function updateHealth(amount) {
@@ -209,7 +209,7 @@ function pickUpItem(itemName) {
 
 // Create a function that checks if the inventory contains one item and if so shows the win condition scene.
 function unlockDoor() {
-  if (inventory.includes("brass key")) {
+  if (inventory.includes("Recipe Note")) {
     updateScene("solution");
   } else {
     messageDisplay.textContent = "The door is locked.";
