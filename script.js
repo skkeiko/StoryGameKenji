@@ -10,12 +10,12 @@
 // --------------------------------------------------
 
 // First, we create a variable for the current scene being displayed
-let currentScene = "backyard";
+let currentScene = "CookingArea";
 
 // Then, we create an object that stores the data for each scene,
 const scenes = {
   // See "backyard" for the first example
-  backyard: {
+  CookingArea: {
     title: "Room One - Cooking Area",
     character: "Interviewee:Chef Frank",
     text: "You search the Cooking area. There are dozens of orders all asking for the new sauce piling up the station.",
@@ -25,20 +25,24 @@ const scenes = {
       {
         text: "Search the area (+10 Stress)",
         action: function () {
-          updateHealth(+10);
+          updateStress(10);
         },
         nextScene: "WalkinFreezer"
       },
       {
         text: "Talk to Chef Frank",
-        nextScene: "hallway"
+        action: function () {
+          updateStress(5);
+          messageDisplay.textContent = "STOP STANDING AROUND I NEED MY RECIPE";
+        },
+        
       },
       {
-          text: "Pick up the recipe note",
+          text: "look around the cooking area",
           action: function () {
-            pickUpItem("Recipe Note");
+            pickUpItem("Recipe Note Reminder");
           },
-          nextScene: "hallway"
+          nextScene: "Office"
       }
     ]
   },
@@ -49,38 +53,47 @@ const scenes = {
     text: "well what I remember...",
     choices: [
       {
-        text: "Ask about the dog",
-        nextScene: "backyard"
+        text: "Ask about the chef",
+        action: function () {
+          updateStress(10);
+        },
+        nextScene: "CookingArea"
       },
          {
-        text: "Ask about the neighbor",
-        nextScene: "hallway"
+        text: "Ask about the dishwasher",
+        action: function () {
+          updateStress(5);
+        },
+        nextScene: "DishwasherRoom"
       }
     ]
   },
 
-  hallway: {
-    title: "The Hallway",
-    text: "The hallway is dark and silent.",
+  DishwasherRoom: {
+    title: "Dishwasher Room",
+    text: "The smell of soap and steam fills the room. The dishwasher is humming in the corner.",
     choices: [
       {
-        text: "backyard",
-        nextScene: "lockedDoor"
+        text: "Talk to the dishwasher",
+        action: function () {
+          updateStress(5);
+        },
+        nextScene: "Office"
       }
     ]
   },
 
-   lockedDoor: {
-    title: "The Locked Door",
-    text: "The door handle doesn't move.",
+   Office: {
+    title: "The Office",
+    text: "The office is cluttered with papers and files.",
     choices: [
       {
-        text: "Try to open it",
+        text: "Look through the papers",
         action: unlockDoor
       },
       {
         text: "Go back",
-        nextScene: "backyard"
+        nextScene: "CookingArea"
       }
     ]
   },
@@ -164,20 +177,20 @@ updateScene(currentScene);
 // create a copy of each step for each additional state you want to track throughout the game
 // --------------------------------------------------
 
-// Create a variable for health
-let health = 0;
+// Create a variable for stress
+let stress = 0;
 
-// Display current health
-const healthDisplay = document.getElementById("Stress-display");
+// Display current stress
+const stressDisplay = document.getElementById("Stress-display");
 
 // Create a function to update health 
-function updateHealth(amount) {
-  health += amount;
-  healthDisplay.textContent = health;
+function updateStress(amount) {
+  stress += amount;
+  stressDisplay.textContent = stress;
 }
 
-// This refreshes the health display
-updateHealth(0);
+// This refreshes the stress display
+updateStress(0);
 
 // --------------------------------------------------
 // INVENTORY
@@ -209,10 +222,10 @@ function pickUpItem(itemName) {
 
 // Create a function that checks if the inventory contains one item and if so shows the win condition scene.
 function unlockDoor() {
-  if (inventory.includes("Recipe Note")) {
+  if (inventory.includes("Recipe Note Reminder")) {
     updateScene("solution");
   } else {
-    messageDisplay.textContent = "The door is locked.";
+    messageDisplay.textContent = "The significance of the pile of papers escapes you. ";
   }
 }
 
