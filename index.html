@@ -5,21 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Overview</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-        <h1>Home Page</h1>
-    <p>This game is a <i><strong>text-based adventure game</strong></i> that I created as a project for my capstone class. This game allows players to make choices that affect the outcome of the story, providing an interactive experience.</p>
-    <img src="https://www.bing.com/th/id/OIP.nvcaacyomM4Sqm7uelLgDQHaEJ?w=193&h=135&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=ImgAns&rm=2">
+
+<body style="text-align: center; background-color:rgb(236, 200, 159); line-height: 1.6;">
+        <h1 style="text-align: center;letter-spacing: 10px;">Home Page</h1>
+    <p style="color:rgb(50, 0, 0);background-color:rgb(0, 128, 105);font-family: Arial, sans-serif;">This game is a <i><strong>text-based adventure game</strong></i> that I created as a project for my capstone class. This game allows players to make choices that affect the outcome of the story, providing an interactive experience.</p>
+    <img src="https://www.bing.com/th/id/OIP.nvcaacyomM4Sqm7uelLgDQHaEJ?w=193&h=135&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=ImgAns&rm=2" style="border-radius: 50px;">
 
     <form action="game.html" method="get">
-        <label for="player-name">Enter your username:</label>
+        <label for="player-name" style="color:rgb(7, 0, 0);background-color:rgb(124, 59, 59);font-family: Arial, sans-serif;">Enter your username:</label>
         <input type="text" id="player-name" name="player-name" required>
         <br><br>
         <label for="year-born">Enter your year of birth:</label>
         <input type="number" id="year-born" name="year-born" min="1900" max="2023" required>
         <br>
         <br>
-        <label for="gender">Select your gender:</label>
+        <label for="gender"style="font-family: 'Courier New', sans-serif;">Select your gender:</label>
         <select id="gender" name="gender" required>
             <option value="">--Please choose an option--</option>
             <option value="male">Male</option>
