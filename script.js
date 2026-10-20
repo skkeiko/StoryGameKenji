@@ -102,6 +102,11 @@ const scenes = {
     title: "The solution",
     text: "You didn't get fired!",
     
+  },
+
+  gameOver: {
+    title: "Game Over",
+    text: "You got fired!", 
   }
 };
 
@@ -186,8 +191,15 @@ const stressDisplay = document.getElementById("Stress-display");
 // Create a function to update health 
 function updateStress(amount) {
   stress += amount;
+  if (stress == 100){
   stressDisplay.textContent = stress;
+  updateScene("gameOver");
+  }
+  else{
+  stressDisplay.textContent = stress;
+  }
 }
+
 
 // This refreshes the stress display
 updateStress(0);
