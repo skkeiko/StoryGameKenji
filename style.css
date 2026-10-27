@@ -9,5 +9,14 @@ body{
     border: 2px black double;
     text-align:center;
     color: white;
-    
+
+}
+
+.card{
+    background-color: peachpuff;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
 }

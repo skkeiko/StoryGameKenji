@@ -10,39 +10,44 @@
 // --------------------------------------------------
 
 // First, we create a variable for the current scene being displayed
-let currentScene = "CookingArea";
+let currentScene = "DiningArea";
 
 // Then, we create an object that stores the data for each scene,
 const scenes = {
   // See "backyard" for the first example
   CookingArea: {
     title: "Room One - Cooking Area",
-    character: "Interviewee:Chef Frank",
+    character: "Scene:Chef Frank",
     text: "You search the Cooking area. There are dozens of orders all asking for the new sauce piling up the station.",
     // you can choose how many choices to include
     // each choice can have text, an action, and/or nextScene
     choices: [
       {
-        text: "Search the area (+10 Stress)",
+        text: "Head over to the Freezer",
         action: function () {
-          updateStress(10);
+          updateStress(5);
         },
         nextScene: "WalkinFreezer"
       },
+
       {
-        text: "Talk to Chef Frank",
+        text: "Talk to Chef Frank(+10 Stress)",
         action: function () {
-          updateStress(5);
+          updateStress(10);
           messageDisplay.textContent = "STOP STANDING AROUND I NEED MY RECIPE";
+          if (inventory.includes("Old recipe note")) {
+            messageDisplay.textContent = "STOP STANDING AROUND I NEED MY RECIPE. Wait, THIS IS THE OLD RECIPE NOTE! I NEED THE NEW RECIPE NOTE! I NEED IT NOW!";
+            updateStress(15);
+          }
         },
         
       },
       {
           text: "look around the cooking area",
           action: function () {
-            pickUpItem("Recipe Note Reminder");
+            pickUpItem("Old recipe note");
+            messageDisplay.textContent = "You found an old recipe note. Insignificant, but it may be useful later. IDK im just text. ";
           },
-          nextScene: "Office"
       }
     ]
   },
@@ -56,8 +61,9 @@ const scenes = {
         text: "Ask about the chef",
         action: function () {
           updateStress(10);
+          messageDisplay.textContent = "Chef Frank is a great chef, but he can be a bit forgetful at times. He ran in with his clipboard, ran around in circles a couple times and ran out of the kitchen. I think he was looking for something, but I don't know what it was.";
         },
-        nextScene: "CookingArea"
+        
       },
          {
         text: "Ask about the dishwasher",
@@ -68,6 +74,7 @@ const scenes = {
       }
     ]
   },
+
 
   DishwasherRoom: {
     title: "Dishwasher Room",
@@ -89,10 +96,21 @@ const scenes = {
     choices: [
       {
         text: "Look through the papers",
-        action: unlockDoor
+        action: LookthroughPapers,
       },
       {
         text: "Go back",
+        nextScene: "CookingArea"
+      }
+    ]
+  },
+
+  DiningArea: {
+    title: "Dining Area",
+    text: "The dining area is a rush, with tables being cleared and new customers arriving. The smell of food fills the air. You see Chef Frank running around, looking for something.",
+    choices: [
+      {
+        text: "Head into the Cooking Area",
         nextScene: "CookingArea"
       }
     ]
@@ -106,7 +124,7 @@ const scenes = {
 
   gameOver: {
     title: "Game Over",
-    text: "You got fired!", 
+    text: "You got fired! Click the Play the Game option above to try again, I was a bit lazy to code a restart button.", 
   }
 };
 
@@ -191,7 +209,7 @@ const stressDisplay = document.getElementById("Stress-display");
 // Create a function to update health 
 function updateStress(amount) {
   stress += amount;
-  if (stress == 100){
+  if (stress >= 100){
   stressDisplay.textContent = stress;
   updateScene("gameOver");
   }
@@ -233,11 +251,23 @@ function pickUpItem(itemName) {
 // --------------------------------------------------
 
 // Create a function that checks if the inventory contains one item and if so shows the win condition scene.
-function unlockDoor() {
-  if (inventory.includes("Recipe Note Reminder")) {
-    updateScene("solution");
-  } else {
+function LookthroughPapers() {
+ if (inventory.includes("Recipe Note Reminder")) {
+    pickupItem("New Recipe Note");
+    messageDisplay.textContent = "You found the new recipe note! You can now give it to Chef Frank and save your job!";
+  } else if(stress >= 75 ){
+    pickupItem("Crinkled New Recipe Note");
+    messageDisplay.textContent = "The significance of the pile of papers escapes you. But you are too stressed and decide to look through the papers anyway. ";
+  }
+  else {
     messageDisplay.textContent = "The significance of the pile of papers escapes you. ";
   }
 }
 
+function giveRecipeNote() {
+  if (inventory.includes("New Recipe Note")) {
+    updateScene("solution");
+  } else {
+    messageDisplay.textContent = "You don't have a recipe note to give to Chef Frank.";
+  }
+}
