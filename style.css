@@ -1,3 +1,13 @@
 body{
     background-color: blanchedalmond;
+    font-family: 'Courier New', Courier, monospace;
+}
+.heading{
+    background-color: darkred;
+    font-family:cursive;
+    letter-spacing: 0.2em;
+    border: 2px black double;
+    text-align:center;
+    color: white;
+    
 }
