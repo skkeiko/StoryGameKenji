@@ -56,6 +56,7 @@ const scenes = {
     title: "Location: Walk-In Freezer",
     character: "Interviewee:Sous-Chef Darren",
     text: "well what I remember...",
+    image: "https://t3.ftcdn.net/jpg/17/11/41/04/360_F_1711410448_Cx2lqBIjOPMJZu0Ou2X3nr9mtc6I7w0l.jpg",
     choices: [
       {
         text: "Ask about the chef",
@@ -92,6 +93,7 @@ const scenes = {
 
    Office: {
     title: "The Office",
+    image: "https://thumbs.dreamstime.com/b/huge-paper-stack-29178450.jpg",
     text: "The office is cluttered with papers and files.",
     choices: [
       {
@@ -125,6 +127,7 @@ const scenes = {
 
   gameOver: {
     title: "Game Over",
+    image: "https://th.bing.com/th/id/OIP.1Ax1mRDvO_xEPA-fQVRdMQHaHa?w=174&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
     text: "You got fired! Click the Play the Game option above to try again, I was a bit lazy to code a restart button.", 
   }
 };
