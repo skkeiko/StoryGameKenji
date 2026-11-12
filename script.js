@@ -108,6 +108,7 @@ const scenes = {
   DiningArea: {
     title: "Dining Area",
     text: "The dining area is a rush, with tables being cleared and new customers arriving. The smell of food fills the air. You see Chef Frank running around, looking for something.",
+    image: "https://thumbs.dreamstime.com/b/busy-restaurant-dining-scene-above-night-vibrant-captured-showcasing-guests-enjoying-meals-under-warm-lights-lively-347591999.jpg", 
     choices: [
       {
         text: "Head into the Cooking Area",
@@ -147,6 +148,7 @@ const sceneTitle = document.getElementById("scene-title");
 const sceneText = document.getElementById("scene-text");
 const choicesContainer = document.getElementById("choices-container");
 const characterName = document.getElementById("character-name");
+const sceneImage = document.getElementById("scene-image");
 
 // Then, we create a function to update the scene,
 function updateScene(sceneName) {
@@ -162,6 +164,7 @@ function updateScene(sceneName) {
   sceneTitle.textContent = scene.title;
   sceneText.textContent = scene.text;
   characterName.textContent = scene.character;
+  sceneImage.src = scene.image;
 
   // Clear the old buttons before creating new ones
   choicesContainer.innerHTML = "";
